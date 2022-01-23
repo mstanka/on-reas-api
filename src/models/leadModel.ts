@@ -23,7 +23,7 @@ const leadSchema = new mongoose.Schema({
 	// @ts-ignore
 	email: {
 		type: String,
-		required: [true, 'A lead must have a phone'],
+		required: [true, 'A lead must have an email'],
 		trim: true,
 		validate: [isEmail],
 	},
@@ -59,6 +59,4 @@ const leadSchema = new mongoose.Schema({
 	},
 });
 
-const Lead = mongoose.model('Lead', leadSchema);
-
-export default Lead;
+export default mongoose.model('Lead', leadSchema);

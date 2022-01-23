@@ -1,21 +1,20 @@
+import { Request, Response } from 'express';
 import Lead from './../models/leadModel';
 
-export const createLead = async (req: Request, res: Response): Promise<void> => {
+export async function createLead(_req: Request, res: Response): Promise<void> {
 	try {
-		const newLead = await Lead.create(req.body);
-        // @ts-ignore  //TODO
-		res.status(201).send({
+		const newLead = new Lead(_req.body);
+		await newLead.save();
+		res.status(201).json({
 			status: 'success',
 			data: {
-				lead: newLead,
+				newLead,
 			},
 		});
 	} catch (err) {
-        // @ts-ignore  //TODO
 		res.status(400).json({
 			status: 'fail',
 			message: err,
 		});
 	}
-};
-
+}
